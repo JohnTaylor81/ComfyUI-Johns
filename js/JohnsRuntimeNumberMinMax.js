@@ -7,7 +7,11 @@ app.registerExtension({
 			"JohnsPrimitiveIntMinMax",
 			"JohnsPrimitiveIntSliderMinMax",
 			"JohnsPrimitiveFloatMinMax",
-			"JohnsPrimitiveFloatSliderMinMax"
+			"JohnsPrimitiveFloatMinMaxP05",
+			"JohnsPrimitiveFloatMinMaxP01",
+			"JohnsPrimitiveFloatSliderMinMax",
+			"JohnsPrimitiveFloatSliderMinMaxP05",
+			"JohnsPrimitiveFloatSliderMinMaxP01"
 		]);
 
 		if (!supportedNodes.has(nodeData.name)) return;
