@@ -81,71 +81,12 @@ class JohnsMathExpression(io.ComfyNode):
 
 	@classmethod
 	def execute(cls, Inputs = None, Expression: str = "N0 + N1", FloatPrecision: int = 3, RoundInt: bool = False) -> io.NodeOutput:
-		results = MathExpression.Evaluate(Inputs = Inputs, Expression = Expression, RoundInt = RoundInt)
+		# Backend now returns typed outputs keyed as Int_1..Int_12, Float_1..Float_12, Bool_1..Bool_12
+		results = MathExpression.Evaluate(Inputs = Inputs, Expression = Expression, FloatPrecision = FloatPrecision, RoundInt = RoundInt)
 
-		def ToInt(v):
-			if v is None:
-				return None
-			
-			if isinstance(v, bool):
-				return int(v)
-			
-			try:
-				fv = float(v)
-			except Exception:
-				return None
-			
-			return int(round(fv)) if RoundInt else int(fv)
-
-		def ToFloat(v):
-			if v is None:
-				return None
-			
-			try:
-				fv = float(v)
-			except Exception:
-				return None
-			try:
-				return round(fv, FloatPrecision)
-			except Exception:
-				return fv
-
-		def ToBool(v):
-			if v is None:
-				return None
-			
-			if isinstance(v, bool):
-				return v
-			
-			if isinstance(v, (int, float)):
-				return bool(v)
-			
-			s = str(v).strip().lower()
-
-			if s in ("true", "1", "yes", "y", "on"):
-				return True
-			
-			if s in ("false", "0", "no", "n", "off", ""):
-				return False
-			
-			return bool(s)
-
-		MAX    = 12
-		ints   = []
-		floats = []
-		bools  = []
-
-		for i in range(1, MAX + 1):
-			v = results.get(f"out_{i}", None)
-			ints.append(ToInt(v))
-
-		for i in range(1, MAX + 1):
-			v = results.get(f"out_{i}", None)
-			floats.append(ToFloat(v))
-
-		for i in range(1, MAX + 1):
-			v = results.get(f"out_{i}", None)
-			bools.append(ToBool(v))
+		MAX = 12
+		ints   = [results.get(f"Int_{i}", None)   for i in range(1, MAX + 1)]
+		floats = [results.get(f"Float_{i}", None) for i in range(1, MAX + 1)]
+		bools  = [results.get(f"Bool_{i}", None)  for i in range(1, MAX + 1)]
 
 		return io.NodeOutput(*ints, *floats, *bools)
-	

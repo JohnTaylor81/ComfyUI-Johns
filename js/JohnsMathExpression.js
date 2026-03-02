@@ -22,27 +22,48 @@ app.registerExtension({
 		};
 
 		nodeType.prototype.updateOutputsFromExpression = function () {
-			const exprWidget    = this.widgets.find(w => w.name === "Expression");
-			const text          = String(exprWidget?.value || "");
-			const regex         = /\bout_(\d+)\b/gi;
+			const exprWidget = this.widgets.find(w => w.name === "Expression");
+			const text = String(exprWidget?.value || "");
+			const regexIndices = /\bout_(\d+)\b/gi;
+			const typeSpecRegex = /\bout_(\d+)\s*\(\s*(int|i|float|f|bool|b)\s*\)/gi;
+
 			const activeIndices = new Set();
 			let match;
-
-			while ((match = regex.exec(text)) !== null) {
-				const idx = parseInt(match[1], 10);
-
-				if (idx >= 1 && idx <= 12) activeIndices.add(idx);
+			while ((match = regexIndices.exec(text)) !== null) {
+				activeIndices.add(parseInt(match[1], 10));
 			}
 
-			if (activeIndices.size === 0) activeIndices.add(1);
+			const typeOverrides = new Map();
+			while ((match = typeSpecRegex.exec(text)) !== null) {
+				const idx = parseInt(match[1], 10);
+				const t = String(match[2] || "").toLowerCase();
+				let mapped = null;
+				if (t === "int" || t === "i") mapped = "Int";
+				if (t === "float" || t === "f") mapped = "Float";
+				if (t === "bool" || t === "b") mapped = "Bool";
+				if (mapped && idx >= 1 && idx <= 12) typeOverrides.set(idx, mapped);
+			}
+
+			if (activeIndices.size === 0 && typeOverrides.size === 0) activeIndices.add(1);
 
 			let visibleIdx = 0;
-			
+
 			this.outputs?.forEach((output) => {
-				const numMatch        = output.name.match(/\d+$/);
-				const num             = numMatch ? parseInt(numMatch[0], 10) : null;
-				const hasLinks        = output.links && output.links.length > 0;
-				const shouldBeVisible = activeIndices.has(num) || hasLinks;
+				const nameMatch = output.name.match(/([A-Za-z]+)[ _](\d+)$/);
+				const socketType = nameMatch ? String(nameMatch[1]).trim() : null;
+				const num = nameMatch ? parseInt(nameMatch[2], 10) : null;
+				const hasLinks = Array.isArray(output.links) && output.links.length > 0;
+
+				let shouldBeVisible = false;
+
+				if (num !== null && typeOverrides.has(num)) {
+					const override = typeOverrides.get(num);
+					shouldBeVisible = (socketType === override);
+				} else {
+					if (hasLinks) shouldBeVisible = true;
+					else if (num !== null && activeIndices.has(num)) shouldBeVisible = true;
+					else shouldBeVisible = false;
+				}
 
 				output._is_hidden = !shouldBeVisible;
 
