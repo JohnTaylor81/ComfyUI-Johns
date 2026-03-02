@@ -132,8 +132,6 @@ function StartDangling(initialState) {
 		runningNode = nodeId != null ? app.graph.getNodeById(nodeId) : null;
 	}
 
-	app.api.addEventListener("executing", onExecuting);
-
 	function UpdateFPS(now) {
 		frameCount++;
 		if (now - lastFPSUpdate > 1000) {
