@@ -337,12 +337,12 @@ class MathExpression:
 
 		vars["ROUND_INT"] = bool(RoundInt)
 
-		Expression = re.sub(
-			r'\bout_(\d+)\s*\(\s*(?:int|i|float|f|bool|b)\s*\)',
-			r'out_\1',
-			Expression,
-			flags = re.IGNORECASE
-		)
+		annotation_pattern = re.compile(r'(\bout_(\d+))\s*\(\s*([^)]*?)\s*\)', flags = re.IGNORECASE)
+		while True:
+			new_expr, n = annotation_pattern.subn(r'\1', Expression)
+			if n == 0:
+				break
+			Expression = new_expr
 
 		# Parse and validate AST
 		try:
