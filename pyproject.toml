@@ -1,0 +1,15 @@
+[project]
+name = "ComfyUI-Johns"
+description = "Tiled Sampler, LoRA loader, Prompt Library, Image Comparer, Mask Editor, Workflow Looper and Branch management. Various helper nodes and UI/UX enhancements."
+version = "0.0.1"
+license = {file = "LICENSE"}
+dependencies = ["rich>=13.0.0"]
+
+[project.urls]
+Repository = "https://github.com/JohnTaylor81/ComfyUI-Johns"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "JohnTaylor81"
+DisplayName = "ComfyUI-Johns"
+Icon = "https://avatars.githubusercontent.com/u/198365691"
