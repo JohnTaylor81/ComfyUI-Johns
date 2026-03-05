@@ -65,9 +65,7 @@ function AdjustNodeSize(node, {
 	max_height = null
 } = {}) {
 
-	const toNum = v => (typeof v === 'number' && Number.isFinite(v))
-		? v
-		: (v == null ? null : (Number(v) || null));
+	const toNum = v => (typeof v === 'number' && Number.isFinite(v)) ? v : (v == null ? null : (Number(v) || null));
 
 	min_width  = toNum(min_width);
 	max_width  = toNum(max_width);
@@ -114,8 +112,8 @@ function AdjustNodeSize(node, {
 
 		if (oldCompute) {
 			const s = oldCompute();
-			baseW = Array.isArray(s) ? s[0] : (s?.w ?? s?.width  ?? node.width  ?? 0);
-			baseH = Array.isArray(s) ? s[1] : (s?.h ?? s?.height ?? node.height ?? 0);
+			baseW   = Array.isArray(s) ? s[0] : (s?.w ?? s?.width  ?? node.width  ?? 0);
+			baseH   = Array.isArray(s) ? s[1] : (s?.h ?? s?.height ?? node.height ?? 0);
 		} else {
 			baseW = node.width ?? 0;
 			baseH = node.height ?? 0;
