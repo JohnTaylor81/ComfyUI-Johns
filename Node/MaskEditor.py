@@ -6,7 +6,7 @@ from .Backend.MaskEditorBackend import Process, GetPreset, GetTitles
 class JohnsMaskEditor(io.ComfyNode):
 	@classmethod
 	def define_schema(cls) -> io.Schema:
-		MaskTemplate = io.Autogrow.TemplatePrefix(io.Mask.Input("Mask", optional = True), prefix = "Mask", min = 1, max = 50)
+		MaskTemplate = io.Autogrow.TemplatePrefix(io.Mask.Input("Mask", optional = True), prefix = "Mask - ", min = 1, max = 50)
 
 		MaskOptions  = io.DynamicCombo.Input(
 			"Mask Options",
