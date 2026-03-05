@@ -23,7 +23,6 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
 
   </details>
 
-
 [![Screenshot](Asset/I2I-Advanced-Clean.png)](Asset/I2I-Advanced-Clean.png)
 
 </details>
@@ -48,7 +47,9 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
   - Settings **saved globally**. New instances will automatically load the **saved state**.  
   - Loading a workflow saved with this node in it will load the setting **from the workflow**.  
 
-[![Video](Asset/LoRALoader.png)](Asset/LoRALoader.mp4)
+[![Screenshot](Asset/LoRALoader.png)](Asset/LoRALoader.png)
+
+https://github.com/user-attachments/assets/f55a93d4-1c26-4d4f-a3f6-ad31a832c1db
 
 </details>
 
@@ -59,7 +60,9 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
   - The node automatically resizes to the image dimensions (max size adjustable in the settings menu).  
   - Button to save image.  
 
-[![Video](Asset/ImageComparer.png)](Asset/ImageComparer.mp4)
+[![Screenshot](Asset/ImageComparer.png)](Asset/ImageComparer.png)
+
+https://github.com/user-attachments/assets/c7d7b1cf-4bd2-4063-8e02-9652fd67aeab
 
 </details>
 
@@ -252,7 +255,9 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
 
 - Combine any number of masks and process it with various methods.  
 
-[![Video](Asset/MaskEditor.png)](Asset/MaskEditor.mp4)
+[![Screenshot](Asset/MaskEditor.png)](Asset/MaskEditor.png)
+
+https://github.com/user-attachments/assets/aed13779-367e-4b92-9054-6f427da09052
 
 </details>
 
@@ -271,7 +276,9 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
 
   </details>
 
-[![Video](Asset/WorkflowLoop.png)](Asset/WorkflowLoop.mp4)
+[![Screenshot](Asset/WorkflowLoop.png)](Asset/WorkflowLoop.png)
+
+https://github.com/user-attachments/assets/287985c1-49c2-4292-9364-ff350bed2a8e
 
 </details>
 
@@ -281,7 +288,9 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
 
   - **Planned feature:** Optionally Mute | Bypass the entire upstream node chain of all but the selected output.
 
-[![Video](Asset/AnySwitch.png)](Asset/AnySwitch.mp4)
+[![Screenshot](Asset/AnySwitch.png)](Asset/AnySwitch.png)
+
+https://github.com/user-attachments/assets/f5d85bd1-d2df-413d-b5bf-58c0d2502379
 
 </details>
 
@@ -289,7 +298,9 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
 
 - **Mute** or **Bypass** a single connected node with **Set Mode - Connected** node, or **all** nodes of the same type on the entire workflow with **Set Mode By Class**. Works inside **subgraphs**, too.
 
-[![Video](Asset/MuteBypass.png)](Asset/MuteBypass.mp4)
+[![Screenshot](Asset/MuteBypass.png)](Asset/MuteBypass.png)
+
+https://github.com/user-attachments/assets/88e01e04-97d6-4a78-a794-8f841aec67bd
 
 </details>
 
