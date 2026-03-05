@@ -10,16 +10,22 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
 
 ### Nodes
 
+<details><summary><strong>All Nodes</strong></summary>
+
+[![Screenshot](Asset/AllNodes.png)](Asset/AllNodes.png)
+
+</details>
+
 <details><summary><strong>Tiled Sampler</strong></summary>
 
-  - A different take on tiled sampling. To unlock the full potential, use it in conjunction with the Tile Diffusion Map node.  
+  - A different take on tiled sampling. To unlock its full potential, use it in conjunction with the **Tile Diffusion Map** node.  
 
 - <details><summary><strong>What it does?</strong></summary>
 
   - Unlike any other tiled sampler, this treats each tile, seams and intersections as independent diffusion runs.  
-  - **What this means?** - The Tile Diffusion Map node collects a set of **Guiders** (CFG), **Samplers** and **Sigmas** (scheduler, steps, denoise strenght).  
+  - **What this means?** - The Tile Diffusion Map node collects a set of **Guiders** (CFG, prompt), **Samplers** and **Sigmas** (scheduler, steps, denoise strenght).  
   - **How it works?** - The Tiled Sampler node consumes the provided Guider, Sampler and Sigmas (can use all three or just what is required), this allows targeted prompt and different denoise strenght on a per-tile base.  
-  - **There's more** - With the retargeting system, each parameter can be re-used on several tiles. With no retargeting rules set, the sampler consumes everything in sequential order. 
+  - **There's more** - With the retargeting system, each parameter can be re-used on multiple tiles. With no retargeting rules set, the sampler consumes everything in sequential order. 
 
   </details>
 
@@ -36,6 +42,8 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
 
 [![Screenshot](Asset/PromptLibrary.png)](Asset/PromptLibrary.png)
 
+https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/PromptLibrary.mp4
+
 </details>
 
 <details><summary><strong>LoRA Loader</strong></summary>
@@ -49,20 +57,20 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
 
 [![Screenshot](Asset/LoRALoader.png)](Asset/LoRALoader.png)
 
-https://github.com/user-attachments/assets/f55a93d4-1c26-4d4f-a3f6-ad31a832c1db
+https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/LoRALoader.mp4
 
 </details>
 
 <details><summary><strong>Image Comparer</strong></summary>
 
-  - Horizontal and vertical reveal.  
-  - Fade comparison.  
+  - **Horizontal** and **vertical** reveal.  
+  - **Fade** comparison.  
   - The node automatically resizes to the image dimensions (max size adjustable in the settings menu).  
   - Button to save image.  
 
 [![Screenshot](Asset/ImageComparer.png)](Asset/ImageComparer.png)
 
-https://github.com/user-attachments/assets/c7d7b1cf-4bd2-4063-8e02-9652fd67aeab
+https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/ImageComparer.mp4
 
 </details>
 
@@ -220,6 +228,8 @@ https://github.com/user-attachments/assets/c7d7b1cf-4bd2-4063-8e02-9652fd67aeab
 
 [![Screenshot](Asset/MathExpression.png)](Asset/MathExpression.png)
 
+https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/MathExpression.mp4
+
 </details>
 
 <details><summary><strong>Resolution Calculator</strong></summary>
@@ -236,7 +246,7 @@ https://github.com/user-attachments/assets/c7d7b1cf-4bd2-4063-8e02-9652fd67aeab
 
     </details>
 
-  - <details><summary><strong>No Image Input</strong></summary>
+  - <details><summary><strong>Withouth Image Input</strong></summary>
 
     - **Aspect Ratio:** Select from a preset.  
     - **Width:** Set to 0 to auto-calculate based on **Height** and **Aspect Ratio**.  
@@ -257,7 +267,7 @@ https://github.com/user-attachments/assets/c7d7b1cf-4bd2-4063-8e02-9652fd67aeab
 
 [![Screenshot](Asset/MaskEditor.png)](Asset/MaskEditor.png)
 
-https://github.com/user-attachments/assets/aed13779-367e-4b92-9054-6f427da09052
+https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/MaskEditor.mp4
 
 </details>
 
@@ -278,29 +288,31 @@ https://github.com/user-attachments/assets/aed13779-367e-4b92-9054-6f427da09052
 
 [![Screenshot](Asset/WorkflowLoop.png)](Asset/WorkflowLoop.png)
 
-https://github.com/user-attachments/assets/287985c1-49c2-4292-9364-ff350bed2a8e
+https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/WorkflowLoop.mp4
 
 </details>
 
 <details><summary><strong>AnySwiths</strong></summary>
 
-- Accepts **any** type of inputs, outputs the selected index. Multiple types can be mixed.
-
-  - **Planned feature:** Optionally Mute | Bypass the entire upstream node chain of all but the selected output.
+- Accepts **any** type of inputs, outputs the selected index.  
+- **Multiple types** can be mixed.
+- Optionally **mute** the **entire upstream node chain** of all but the selected output.  
 
 [![Screenshot](Asset/AnySwitch.png)](Asset/AnySwitch.png)
 
-https://github.com/user-attachments/assets/f5d85bd1-d2df-413d-b5bf-58c0d2502379
+https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/AnySwitch.mp4
 
 </details>
 
-<details><summary><strong>Mute | Bypass</strong></summary>
+<details><summary><strong>Set Mode</strong></summary>
 
-- **Mute** or **Bypass** a single connected node with **Set Mode - Connected** node, or **all** nodes of the same type on the entire workflow with **Set Mode By Class**. Works inside **subgraphs**, too.
+- Mute or bypass **all** nodes of the same type on the entire workflow with **Set Mode By Class**.  
+- Mute or bypass **connected** nodes with **Set Mode By Class**.  Multipe nodes and different types can be linked to the same node.
+- Works inside **subgraphs**, too.  
 
-[![Screenshot](Asset/MuteBypass.png)](Asset/MuteBypass.png)
+[![Screenshot](Asset/SetMode.png)](Asset/SetMode.png)
 
-https://github.com/user-attachments/assets/88e01e04-97d6-4a78-a794-8f841aec67bd
+https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/SetMode.mp4
 
 </details>
 
