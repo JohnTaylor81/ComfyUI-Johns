@@ -42,7 +42,7 @@ This is not a loose collection of nodes. It is a cohesive system that extends bo
 
 [![Screenshot](Asset/PromptLibrary.png)](Asset/PromptLibrary.png)
 
-https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/PromptLibrary.mp4
+https://github.com/user-attachments/assets/1f393386-6e1c-4520-94d7-b54a8dff934f
 
 </details>
 
@@ -57,7 +57,7 @@ https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bb
 
 [![Screenshot](Asset/LoRALoader.png)](Asset/LoRALoader.png)
 
-https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/LoRALoader.mp4
+https://github.com/user-attachments/assets/51d8a819-af38-40d4-8f4b-5ee43168aad7
 
 </details>
 
@@ -70,7 +70,7 @@ https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bb
 
 [![Screenshot](Asset/ImageComparer.png)](Asset/ImageComparer.png)
 
-https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/ImageComparer.mp4
+https://github.com/user-attachments/assets/28d7f9d4-3145-490b-b933-ac965799d41f
 
 </details>
 
@@ -228,7 +228,7 @@ https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bb
 
 [![Screenshot](Asset/MathExpression.png)](Asset/MathExpression.png)
 
-https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/MathExpression.mp4
+https://github.com/user-attachments/assets/06b0acc8-850f-432d-8153-017a429d9ae5
 
 </details>
 
@@ -267,7 +267,7 @@ https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bb
 
 [![Screenshot](Asset/MaskEditor.png)](Asset/MaskEditor.png)
 
-https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/MaskEditor.mp4
+https://github.com/user-attachments/assets/70c9542f-faa7-4d72-9bac-9b6811f49a61
 
 </details>
 
@@ -288,7 +288,7 @@ https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bb
 
 [![Screenshot](Asset/WorkflowLoop.png)](Asset/WorkflowLoop.png)
 
-https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/WorkflowLoop.mp4
+https://github.com/user-attachments/assets/bc1c1ab4-5351-4e90-89ca-5cb21d83d877
 
 </details>
 
@@ -300,7 +300,7 @@ https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bb
 
 [![Screenshot](Asset/AnySwitch.png)](Asset/AnySwitch.png)
 
-https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/AnySwitch.mp4
+https://github.com/user-attachments/assets/db8b0222-fc1e-4de9-a471-2a53ccb786e3
 
 </details>
 
@@ -312,7 +312,7 @@ https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bb
 
 [![Screenshot](Asset/SetMode.png)](Asset/SetMode.png)
 
-https://github.com/JohnTaylor81/ComfyUI-Johns/blob/ca25631c308cdc6ac1427d55f41bbfaa46b62e52/Asset/SetMode.mp4
+https://github.com/user-attachments/assets/3bed07c6-2289-487a-ad3e-f95481133092
 
 </details>
 
