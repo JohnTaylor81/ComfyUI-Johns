@@ -612,16 +612,35 @@ def JohnsTiledSampler(
 				y_center = seam_y * tile_height
 				x_center = seam_x * tile_width
 
-				iy0 = max(0, y_center - (tile_height // 2))
-				iy1 = min(height, iy0 + tile_height)
-				ix0 = max(0, x_center - (tile_width // 2))
-				ix1 = min(width,  ix0 + tile_width)
+				y0 = max(0, y_center - (tile_height // 2))
+				y1 = min(height, y0 + tile_height)
+				x0 = max(0, x_center - (tile_width // 2))
+				x1 = min(width,  x0 + tile_width)
+
+				top_pad   = pad_y
+				bot_pad   = pad_y
+				left_pad  = pad_x
+				right_pad = pad_x
+
+				iy0 = max(0, y0 - top_pad)
+				iy1 = min(height, y1 + bot_pad)
+				ix0 = max(0, x0 - left_pad)
+				ix1 = min(width,  x1 + right_pad)
 
 				yield {
 					"type"    : "intersection",
 					"coords"  : (iy0, iy1, ix0, ix1),
 					"noise"   : inter_noise,
-					"alpha_fn": lambda h, w: AlphaIntersection(h, w, out.device, out.dtype),
+					"alpha_fn": lambda h, w, iy0 = iy0, iy1 = iy1, ix0 = ix0, ix1 = ix1, y0 = y0, y1 = y1, x0 = x0, x1 = x1, top_pad = top_pad, bot_pad = bot_pad, left_pad = left_pad, right_pad = right_pad:
+						AlphaIntersection(h, w, out.device, out.dtype) * AlphaPadding(
+							h, w,
+							left   = int(left_pad  if ix0 == (x0 - left_pad)  else (x0  - ix0)),
+							right  = int(right_pad if ix1 == (x1 + right_pad) else (ix1 - x1)),
+							top    = int(top_pad   if iy0 == (y0 - top_pad)   else (y0  - iy0)),
+							bottom = int(bot_pad   if iy1 == (y1 + bot_pad)   else (iy1 - y1)),
+							device = out.device,
+							dtype  = out.dtype
+						),
 					"label"   : "Int."
 				}
 
