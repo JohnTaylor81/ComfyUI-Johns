@@ -15,8 +15,9 @@ class JohnsAnySwitch(io.ComfyNode):
 			search_aliases = ["switch", "any"],
 			is_output_node = True,
 			inputs         = [
-				io.Autogrow.Input("Input",     template = InputTemplate),
-				io.Int.Input     ("Selection", display_name = "Selection", default  = 0, min = 0, max = 64, step = 1)
+				io.Autogrow.Input("Input",     template     = InputTemplate),
+				io.Int.Input     ("Selection",    display_name = "Selection",     default  = 0,     min = 0, max = 64, step = 1),
+				io.Boolean.Input ("MuteUpstream", display_name = "Mute Upstream", default  = False, label_off = "False", label_on = "True")
 			],
 			outputs = [
 				io.AnyType.Output("Output")
@@ -24,5 +25,5 @@ class JohnsAnySwitch(io.ComfyNode):
 		)
 
 	@classmethod
-	def execute(cls, Input: io.Autogrow.Type, Selection) -> io.NodeOutput:
+	def execute(cls, Input: io.Autogrow.Type, Selection, MuteUpstream = False) -> io.NodeOutput:
 		return io.NodeOutput(Run(Input, Selection))
