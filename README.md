@@ -436,6 +436,19 @@ https://github.com/user-attachments/assets/73c2eff1-fd16-4785-8293-46601df1dca8
 
 </details>
 
+<details><summary><strong>Mouse Trail</strong></summary>
+
+- A small info string trailing the mouse pointer.  
+
+- <details><summary><strong>Why?</strong></summary>
+
+  - Eraly 2000's nostalgia.  
+  - Makes me giggle :)  
+
+  </details>
+
+</details>
+
 ---
 
 ## Installation
