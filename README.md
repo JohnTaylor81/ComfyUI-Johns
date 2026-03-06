@@ -337,6 +337,99 @@ https://github.com/user-attachments/assets/3bed07c6-2289-487a-ad3e-f95481133092
 
 ---
 
+### UI/UX
+
+<details><summary><strong>Origin Axes</strong></summary>
+
+- Visualize the **[0, 0]** canvas coordinates.  
+
+- <details><summary><strong>What it does?</strong></summary>
+
+  - This extension adds a **blue square** to **[0, 0]**  
+  - **Red** and **green** lines to **vertical** and **horizontal axes**.  
+  - **Three ways to toggle on/off:** Click the **blue square**, button group **icon**, **setting menu**.  
+  - Square **size**, line **width** and **opacity** adjustable in the setting menu.  
+
+  </details>
+
+- <details><summary><strong>Why?</strong></summary>
+
+   - Having a healthy amount of **OCD**, the first thing I **always** did creating a new workflow was to add the first node, save the workflow, open it up in a text editor and set the node position to **[0, 0]**. No more.  
+   - Fun fact: This was the very first custom anything I made for ComfyUI and is what got me into this.  
+
+   </details>
+
+[![Screenshot](Asset/OriginAxes.png)](Asset/OriginAxes.png)
+
+</details>
+
+<details><summary><strong>Normalize Node IDs</strong></summary>
+
+- Clean up node **ID**s  
+
+- <details><summary><strong>What it does?</strong></summary>
+
+  - This extension adds a **button** to the top button group.  
+  - **Clones** the active workflow (**Active workflow:** The last one that you made any change to).  
+  - **Normalizes** node IDs starting from the top-left most node going in vertical columns.  
+  - **Selected** nodes prioritized.  
+
+  </details>
+
+- <details><summary><strong>Why?</strong></summary>
+
+  - Creating a custom workflow is a **process**. You **add** nodes, **remove** nodes, **reorganize** and **reorder**.  
+  - Most people probably **don't even know** or **care** that there is an option to show node IDs, **but I do**.
+  - Again, having a bit of an **OCD**, it always bothered me when finished a workflow that the node IDs had **gaps** and/or **not in the right order**.  
+
+  </details>
+
+</details>
+
+<details><summary><strong>Node Borders</strong></summary>
+
+- Replaces the native borders for **running** and **selected** nodes. Can be turned off in the settings.  
+
+- <details><summary><strong>Why?</strong></summary>
+
+  - Because it **looks better** :)  
+
+  </details>
+
+[![Screenshot](Asset/NodeBorders.png)](Asset/NodeBorders.png)
+
+</details>
+
+<details><summary><strong>Corner Rounding</strong></summary>
+
+- Removes the rounded corners.  
+
+- <details><summary><strong>Why?</strong></summary>
+
+  - Because I don't like the corner roundings :)  
+
+  </details>
+
+[![Screenshot](Asset/CornerRounding.png)](Asset/CornerRounding.png)
+
+</details>
+
+<details><summary><strong>Synched Nodes</strong></summary>
+
+- Visualizing **connection** and **synchronized settings** between two nodes. Currently limited to the **Tiled Sampler** and its companion **Tile Diffusion Map** nodes.  
+
+- <details><summary><strong>Why?</strong></summary>
+
+  - Because it looks cool :)  
+
+  </details>
+
+[![Screenshot](Asset/SynchedNodes.png)](Asset/SynchedNodes.png)
+
+</details>
+
+---
+
 ## Installation
 
 ### Option 1: ComfyUI-Manager (Recommended)
