@@ -484,6 +484,22 @@ Feedback, bug reports, edge case findings, and performance observations are high
 
 ---
 
+### Change Log
+
+<details><summary><strong>2026-03-06</strong></summary>
+
+- Added Change Log Section.  
+
+- <details><summary><strong>Details</strong></summary>
+
+  - Added Change Log Section to README.md.  
+
+  </details>
+
+</details>
+
+---
+
 ## Credits
 
 This project exists because of a clear vision: John defined the concept, architecture direction, feature requirements, and execution philosophy behind this node pack.
