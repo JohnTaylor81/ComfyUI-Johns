@@ -1,6 +1,6 @@
 import { app } from "/scripts/app.js";
 import { api } from "/scripts/api.js";
-import { InsertSpacerAfterWidget } from "./JohnsWidgetHacks.js";
+import { AddSpacerWidget, InsertSpacerAfterWidget } from "./JohnsWidgetHacks.js";
 import { ShowToastAtMouse } from "./JohnsToast.js";
 
 const PLACEHOLDER_ADD_NEW_PROMPT  = "Add New Prompt";
@@ -467,9 +467,6 @@ app.registerExtension({
 				ctx.restore();
 			};
 
-			const spacer = this.addWidget("separator", "", null, null);
-			
-			spacer.computeSize = () => [0, 6];
 
 			RefreshAll().catch(console.error);
 
@@ -487,6 +484,7 @@ app.registerExtension({
 				})(this.onRemoved);
 			
 			InsertSpacerAfterWidget(this, "Prompt");
+			AddSpacerWidget(this, { height: 6, draw_line: false });
 
 			return r;
 		};

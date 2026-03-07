@@ -1,18 +1,24 @@
 import { app } from "/scripts/app.js";
 
 
-function InsertSpacerAfterWidget(node, widgetName, {
+function AddSpacerWidget(node, {
+	name          = "",
 	height        = 10,
 	draw_line     = true,
 	line_color    = "rgba(230, 200, 120, 0.85)"
 } = {}) {
-	const idx = node.widgets.findIndex(w => w.name === widgetName);
-	if (idx === -1) return;
-
-	const spacer       = node.addWidget("separator", "", null, null);
-	spacer.computeSize = function (ctx, nodeRef) {
-		return [Math.max(0, nodeRef?.size?.[0] || 0), height];
-	};
+	const spacer = node.addCustomWidget({
+		type     : "separator",
+		name,
+		value    : null,
+		options  : {},
+		y        : 0,
+		serialize: false,
+		computeSize(nodeWidth) {
+			const width = Number.isFinite(nodeWidth) ? nodeWidth : (node?.size?.[0] ?? 0);
+			return [Math.max(0, width), height];
+		}
+	});
 
 	spacer.size  = [0, height];
 	spacer._size = [0, height];
@@ -34,8 +40,25 @@ function InsertSpacerAfterWidget(node, widgetName, {
 		};
 	}
 
-	const last = node.widgets.pop();
-	node.widgets.splice(idx + 1, 0, last);
+	return spacer;
+}
+
+
+function InsertSpacerAfterWidget(node, widgetName, {
+	height        = 10,
+	draw_line     = true,
+	line_color    = "rgba(230, 200, 120, 0.85)"
+} = {}) {
+	const idx = node.widgets.findIndex(w => w.name === widgetName);
+	if (idx === -1) return;
+
+	const spacer    = AddSpacerWidget(node, { height, draw_line, line_color });
+	const spacerIdx = node.widgets.indexOf(spacer);
+
+	if (spacerIdx !== -1) {
+		node.widgets.splice(spacerIdx, 1);
+		node.widgets.splice(idx + 1, 0, spacer);
+	}
 
 	if (node.graph && node.graph._version !== undefined) {
 		node.setDirtyCanvas(true, true);
@@ -188,4 +211,4 @@ function CompactMultilineInput(node, widgetName) {
 	}
 }
 
-export { InsertSpacerAfterWidget, RemoveWidget, AdjustNodeSize, CompactMultilineInput };
+export { AddSpacerWidget, InsertSpacerAfterWidget, RemoveWidget, AdjustNodeSize, CompactMultilineInput };
