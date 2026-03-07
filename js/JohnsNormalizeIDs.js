@@ -1,6 +1,5 @@
 import { app } from "/scripts/app.js";
-import { ComfyButtonGroup } from "/scripts/ui/components/buttonGroup.js";
-import { ComfyButton } from "/scripts/ui/components/button.js";
+import { getComfyUiComponents } from "./JohnsComfyUiApi.js";
 
 const BUTTON_GROUP_CLASS  = "normalize-ids-top-menu-group";
 const TOOLTIP             = "Normalize Node IDs - Selected nodes prioritized";
@@ -328,7 +327,8 @@ function normalizeWorkflow() {
 	);
 }
 
-const CreateButton = () => {
+const CreateButton = async () => {
+	const { ComfyButton } = await getComfyUiComponents();
 	const button = new ComfyButton({
 		tooltip: TOOLTIP,
 		app,
@@ -350,7 +350,7 @@ const CreateButton = () => {
 	return button;
 };
 
-const AttachButton = (attempt = 0) => {
+const AttachButton = async (attempt = 0) => {
 	if (document.querySelector(`.${BUTTON_GROUP_CLASS}`)) return;
 
 	const settingsGroup = app.menu?.settingsGroup;
@@ -358,12 +358,15 @@ const AttachButton = (attempt = 0) => {
 	if (!settingsGroup?.element?.parentElement) {
 		if (attempt >= MAX_ATTACH_ATTEMPTS) return;
 
-		requestAnimationFrame(() => AttachButton(attempt + 1));
+		requestAnimationFrame(() => {
+			void AttachButton(attempt + 1);
+		});
 
 		return;
 	}
 
-	const button = CreateButton();
+	const { ComfyButtonGroup } = await getComfyUiComponents();
+	const button = await CreateButton();
 	const group  = new ComfyButtonGroup(button);
 
 	group.element.classList.add(BUTTON_GROUP_CLASS);
@@ -373,6 +376,6 @@ const AttachButton = (attempt = 0) => {
 app.registerExtension({
 	name: "JohnsNormalizeIDs",
 	async setup() {
-		AttachButton();
+		await AttachButton();
 	}
 });

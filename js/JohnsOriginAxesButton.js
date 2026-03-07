@@ -1,6 +1,5 @@
 import { app } from "/scripts/app.js";
-import { ComfyButtonGroup } from "/scripts/ui/components/buttonGroup.js";
-import { ComfyButton } from "/scripts/ui/components/button.js";
+import { getComfyUiComponents } from "./JohnsComfyUiApi.js";
 
 import {
 	getAll,
@@ -52,10 +51,11 @@ const GetAxesIcon = (enabled) => {
     </svg>`;
 };
 
-const CreateButton = () => {
+const CreateButton = async () => {
 	OriginAxesStyles();
 
 	let state = getAll();
+	const { ComfyButton } = await getComfyUiComponents();
 
 	const button = new ComfyButton({
 		tooltip: TOOLTIP,
@@ -90,19 +90,24 @@ const CreateButton = () => {
 	return button;
 };
 
-const AttachButton = (attempt = 0) => {
+const AttachButton = async (attempt = 0) => {
 	if (document.querySelector(`.${BUTTON_GROUP_CLASS}`)) return;
 
 	const settingsGroup = app.menu?.settingsGroup;
 
 	if (!settingsGroup?.element?.parentElement) {
 		if (attempt >= MAX_ATTACH_ATTEMPTS) return;
-		requestAnimationFrame(() => AttachButton(attempt + 1));
+
+		requestAnimationFrame(() => {
+			void AttachButton(attempt + 1);
+		});
+
 		return;
 	}
 
-	const button = CreateButton();
-	const group = new ComfyButtonGroup(button);
+	const { ComfyButtonGroup } = await getComfyUiComponents();
+	const button = await CreateButton();
+	const group  = new ComfyButtonGroup(button);
 
 	group.element.classList.add(BUTTON_GROUP_CLASS);
 	settingsGroup.element.before(group.element);
@@ -111,6 +116,6 @@ const AttachButton = (attempt = 0) => {
 app.registerExtension({
 	name: "OriginAxes.TopMenuIcon",
 	async setup() {
-		AttachButton();
+		await AttachButton();
 	}
 });
