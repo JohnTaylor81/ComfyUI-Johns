@@ -3,7 +3,7 @@ name = "ComfyUI-Johns"
 description = "Tiled Sampler, LoRA loader, Prompt Library, Image Comparer, Mask Editor, Workflow Looper and Branch management. Various helper nodes and UI/UX enhancements."
 version = "0.0.1"
 license = {file = "LICENSE"}
-dependencies = ["rich>=13.0.0"]
+dependencies = ["rich>=13.0.0", "colorama"]
 
 [project.urls]
 Repository = "https://github.com/JohnTaylor81/ComfyUI-Johns"
