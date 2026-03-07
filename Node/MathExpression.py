@@ -81,7 +81,6 @@ class JohnsMathExpression(io.ComfyNode):
 
 	@classmethod
 	def execute(cls, Inputs = None, Expression: str = "N0 + N1", FloatPrecision: int = 3, RoundInt: bool = False) -> io.NodeOutput:
-		# Backend now returns typed outputs keyed as Int_1..Int_12, Float_1..Float_12, Bool_1..Bool_12
 		results = MathExpression.Evaluate(Inputs = Inputs, Expression = Expression, FloatPrecision = FloatPrecision, RoundInt = RoundInt)
 
 		MAX = 12

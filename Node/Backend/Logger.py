@@ -1,17 +1,51 @@
 
 from __future__ import annotations
-import sys
+import ctypes
 import datetime
 import platform
-from colorama import Fore, Style, init, AnsiToWin32
+import sys
 
 
-init(autoreset = True, convert = True, strip = False)
+class Fore:
+	BLACK   = "\033[30m"
+	RED     = "\033[31m"
+	GREEN   = "\033[32m"
+	YELLOW  = "\033[33m"
+	BLUE    = "\033[34m"
+	MAGENTA = "\033[35m"
+	CYAN    = "\033[36m"
+	WHITE   = "\033[37m"
 
 
-if platform.system() == "Windows":
-	sys.stdout = AnsiToWin32(sys.stdout, convert=True).stream
-	sys.stderr = AnsiToWin32(sys.stderr, convert=True).stream
+class Style:
+	BRIGHT    = "\033[1m"
+	DIM       = "\033[2m"
+	NORMAL    = "\033[22m"
+	RESET_ALL = "\033[0m"
+
+
+def EnableWindowsANSI():
+	if platform.system() != "Windows":
+		return
+
+	kernel32 = ctypes.windll.kernel32
+	enable_virtual_terminal_processing = 0x0004
+
+	for handle_id in (-11, -12):
+		handle = kernel32.GetStdHandle(handle_id)
+
+		if handle in (0, -1):
+			continue
+
+		mode = ctypes.c_uint32()
+
+		if not kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
+			continue
+
+		kernel32.SetConsoleMode(handle, mode.value | enable_virtual_terminal_processing)
+
+
+EnableWindowsANSI()
 
 
 class Console:
