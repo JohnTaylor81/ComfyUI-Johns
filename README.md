@@ -523,6 +523,23 @@ Feedback, bug reports, edge case findings, and performance observations are high
 
 ---
 
+### Known Issues
+
+<details><summary><strong>2026-03-08</strong></summary>
+
+  When I started building custom nodes, I decided to use the fairly new Schema V3 architecture. This was both a good and bad decision. The good part is that I get to use new features, the bad is that they're unstable. 
+
+  - **AutoGrow:** This new input type dynamically appends an extra socket when You connect a link to it. However, the links break when you copy/paste workflows or parts of a workflow that uses this type of input. Sometimes it also randomly re-orders sockets, and the only way to fix the node is by deleting it and adding it again, and re-link all the connections. It also often breaks inside subgraphs. The issue is not with my implementation, because for example the core node Batch Images that ships with ComfyUI behaves the exact same way. This is a "It's not me, it's You" issue.  
+  - **DynamicCombo:** This input type enables to show completely different set of widgets based on the selected combo option. This is a great feature, except during my testing, the widget values get all jumbled when I reload a saved workflow. Again, a "It's not me, it's You" issue. To fix the affected nodes, You have to manually reset the widget values to how it was when You saved it. 
+
+  Since these issues are ComfyUI implementation related, there's nothing I can do about it. The best I can hope for is that they'll fix it eventually. In the meantime, my recommendation is to run ComfyUI with the latest frontend and have it always up to date. Add this to your run_nvidia_gpu.bat (or however You're launching ComfyUI):
+
+  `--front-end-version Comfy-Org/ComfyUI_frontend@latest`
+
+</details>
+
+---
+
 ## Credits
 
 This project exists because of a clear vision: John defined the concept, architecture direction, feature requirements, and execution philosophy behind this node pack.
