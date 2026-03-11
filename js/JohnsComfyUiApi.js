@@ -1,6 +1,6 @@
 let componentsPromise = null;
 
-function getComfyUiComponentsFromApi() {
+function GetComfyUiComponentsFromApi() {
 	const comfyApi         = globalThis.comfyAPI;
 	const ComfyButton      = comfyApi?.button?.ComfyButton;
 	const ComfyButtonGroup = comfyApi?.buttonGroup?.ComfyButtonGroup;
@@ -12,8 +12,8 @@ function getComfyUiComponentsFromApi() {
 	return { ComfyButton, ComfyButtonGroup };
 }
 
-async function getComfyUiComponents() {
-	const fromApi = getComfyUiComponentsFromApi();
+async function GetComfyUiComponents() {
+	const fromApi = GetComfyUiComponentsFromApi();
 
 	if (fromApi) {
 		return fromApi;
@@ -32,4 +32,4 @@ async function getComfyUiComponents() {
 	return componentsPromise;
 }
 
-export { getComfyUiComponents };
+export { GetComfyUiComponents };

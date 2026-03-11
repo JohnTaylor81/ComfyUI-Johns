@@ -2,18 +2,18 @@ import { app } from "/scripts/app.js";
 
 
 function AddSpacerWidget(node, {
-	name          = "",
-	height        = 10,
-	draw_line     = true,
-	line_color    = "rgba(230, 200, 120, 0.85)"
+	name       = "",
+	height     = 10,
+	draw_line  = true,
+	line_color = "rgba(230, 200, 120, 0.85)"
 } = {}) {
 	const spacer = node.addCustomWidget({
-		type     : "separator",
+		type: "spacer",
 		name,
 		value    : null,
 		options  : {},
 		y        : 0,
-		serialize: false,
+		serialize: true,
 		computeSize(nodeWidth) {
 			const width = Number.isFinite(nodeWidth) ? nodeWidth : (node?.size?.[0] ?? 0);
 			return [Math.max(0, width), height];
@@ -26,6 +26,7 @@ function AddSpacerWidget(node, {
 	if (draw_line) {
 		spacer.draw = function (ctx, node) {
 			if (!node || typeof this.last_y !== "number") return;
+
 			const nodeWidth = node.size[0];
 			const offsetX   = nodeWidth * 0.05;
 			const drawWidth = nodeWidth * 0.9;
@@ -45,9 +46,9 @@ function AddSpacerWidget(node, {
 
 
 function InsertSpacerAfterWidget(node, widgetName, {
-	height        = 10,
-	draw_line     = true,
-	line_color    = "rgba(230, 200, 120, 0.85)"
+	height     = 10,
+	draw_line  = true,
+	line_color = "rgba(230, 200, 120, 0.85)"
 } = {}) {
 	const idx = node.widgets.findIndex(w => w.name === widgetName);
 	if (idx === -1) return;
@@ -74,8 +75,8 @@ function RemoveWidget(node, widgetName, {
 	const idx = node.widgets.findIndex(w => w.name === widgetName);
 	if (idx === -1) return;
 
-	let deleteIdx = idx;
-	if (mode === 'before' && idx > 0) deleteIdx = idx - 1;
+	let deleteIdx                                                         = idx;
+	if (mode === 'before' && idx > 0) deleteIdx                           = idx - 1;
 	else if (mode === 'after' && idx < node.widgets.length - 1) deleteIdx = idx + 1;
 	node.widgets.splice(deleteIdx, 1);
 }
@@ -108,10 +109,11 @@ function AdjustNodeSize(node, {
 	};
 
 	const oldOnResize = node.onResize;
+
 	node.onResize = function (size) {
 		try {
-			const w = Array.isArray(size) ? size[0] : size?.[0];
-			const h = Array.isArray(size) ? size[1] : size?.[1];
+			const w        = Array.isArray(size) ? size[0] : size?.[0];
+			const h        = Array.isArray(size) ? size[1] : size?.[1];
 			const [cw, ch] = clamp(w, h);
 
 			if (Array.isArray(size)) {
@@ -199,7 +201,7 @@ function AdjustNodeSize(node, {
 function CompactMultilineInput(node, widgetName) {
 	const widget = node.widgets.find(w => w.name === widgetName);
 	if (!widget) return;
-	
+
 	// Access the DOM element if it exists (for multiline inputs)
 	const inputEl = widget.inputEl || (widget.element && widget.element.querySelector('textarea'));
 	if (inputEl) {
@@ -207,7 +209,7 @@ function CompactMultilineInput(node, widgetName) {
 		inputEl.style.margin       = '-10px 0px 220px 10px';
 		inputEl.style.marginBottom = '-20px';
 		inputEl.style.marginTop    = '-10px';
-		console.log(`Compacted multiline input for widget "${widgetName}"`); // Debug log
+		console.log(`Compacted multiline input for widget "${widgetName}"`);  // Debug log
 	}
 }
 

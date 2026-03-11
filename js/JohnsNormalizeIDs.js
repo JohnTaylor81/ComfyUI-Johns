@@ -1,11 +1,11 @@
 import { app } from "/scripts/app.js";
-import { getComfyUiComponents } from "./JohnsComfyUiApi.js";
+import { GetComfyUiComponents } from "./JohnsComfyUiApi.js";
 
 const BUTTON_GROUP_CLASS  = "normalize-ids-top-menu-group";
 const TOOLTIP             = "Normalize Node IDs - Selected nodes prioritized";
 const MAX_ATTACH_ATTEMPTS = 120;
 
-function addNodeId(idSet, rawId) {
+function AddNodeId(idSet, rawId) {
 	const id = Number(rawId);
 
 	if (Number.isFinite(id)) {
@@ -13,7 +13,7 @@ function addNodeId(idSet, rawId) {
 	}
 }
 
-function getSelectedNodeIds() {
+function GetSelectedNodeIds() {
 	const ids      = new Set();
 	const canvas   = globalThis.LGraphCanvas?.active_canvas ?? app.canvas;
 	const selected = canvas?.selected_nodes;
@@ -21,17 +21,17 @@ function getSelectedNodeIds() {
 	if (Array.isArray(selected)) {
 		for (const entry of selected) {
 			if (entry && typeof entry === "object") {
-				addNodeId(ids, entry.id);
+				AddNodeId(ids, entry.id);
 			} else {
-				addNodeId(ids, entry);
+				AddNodeId(ids, entry);
 			}
 		}
 	} else if (selected && typeof selected === "object") {
 		for (const [key, value] of Object.entries(selected)) {
 			if (value && typeof value === "object" && "id" in value) {
-				addNodeId(ids, value.id);
+				AddNodeId(ids, value.id);
 			} else {
-				addNodeId(ids, key);
+				AddNodeId(ids, key);
 			}
 		}
 	}
@@ -39,7 +39,7 @@ function getSelectedNodeIds() {
 	if (ids.size === 0 && Array.isArray(app.graph?._nodes)) {
 		for (const node of app.graph._nodes) {
 			if (node?.selected) {
-				addNodeId(ids, node.id);
+				AddNodeId(ids, node.id);
 			}
 		}
 	}
@@ -47,7 +47,7 @@ function getSelectedNodeIds() {
 	return ids;
 }
 
-function getNodePos(node) {
+function GetNodePos(node) {
 	const pos = node?.pos;
 
 	if (Array.isArray(pos)) {
@@ -61,9 +61,9 @@ function getNodePos(node) {
 	return [0, 0];
 }
 
-function compareByGraphPosition(a, b) {
-	const [ax, ay] = getNodePos(a);
-	const [bx, by] = getNodePos(b);
+function CompareByGraphPosition(a, b) {
+	const [ax, ay] = GetNodePos(a);
+	const [bx, by] = GetNodePos(b);
 
 	if (ax !== bx) return ax - bx;
 	if (ay !== by) return ay - by;
@@ -83,7 +83,7 @@ function normalizeGraphId(rawId) {
 	return null;
 }
 
-function getSelectionForGraph(graphData, selectedIds, activeGraphId, isRoot = false) {
+function GetSelectionForGraph(graphData, selectedIds, activeGraphId, isRoot = false) {
 	if (!(selectedIds instanceof Set) || selectedIds.size === 0) {
 		return EMPTY_ID_SET;
 	}
@@ -101,7 +101,7 @@ function getSelectionForGraph(graphData, selectedIds, activeGraphId, isRoot = fa
 	return isRoot ? selectedIds : EMPTY_ID_SET;
 }
 
-function remapLink(link, idMap) {
+function RemapLink(link, idMap) {
 	if (Array.isArray(link)) {
 		const [id, origin, originSlot, target, targetSlot, type] = link;
 		return [
@@ -139,7 +139,7 @@ function remapLink(link, idMap) {
 	return link;
 }
 
-function getLinkId(link, fallbackId = null) {
+function GetLinkId(link, fallbackId = null) {
 	if (Array.isArray(link)) {
 		const id = Number(link[0]);
 
@@ -161,12 +161,12 @@ function getLinkId(link, fallbackId = null) {
 	return null;
 }
 
-function remapLinksAndFindMax(links, idMap) {
+function RemapLinksAndFindMax(links, idMap) {
 	if (Array.isArray(links)) {
-		let maxLinkId = 0;
+		let maxLinkId  = 0;
 		const remapped = links.map((link) => {
-			const mapped = remapLink(link, idMap);
-			const linkId = getLinkId(mapped);
+			const mapped = RemapLink(link, idMap);
+			const linkId = GetLinkId(mapped);
 
 			if (linkId != null && linkId > maxLinkId) {
 				maxLinkId = linkId;
@@ -183,10 +183,10 @@ function remapLinksAndFindMax(links, idMap) {
 		const remapped = {};
 
 		for (const [key, link] of Object.entries(links)) {
-			const mapped  = remapLink(link, idMap);
+			const mapped  = RemapLink(link, idMap);
 			remapped[key] = mapped;
 
-			const linkId = getLinkId(mapped, key);
+			const linkId = GetLinkId(mapped, key);
 
 			if (linkId != null && linkId > maxLinkId) {
 				maxLinkId = linkId;
@@ -199,7 +199,7 @@ function remapLinksAndFindMax(links, idMap) {
 	return { links, maxLinkId: 0 };
 }
 
-function normalizeGraphContainer(graphData, selectedIds = EMPTY_ID_SET) {
+function NormalizeGraphContainer(graphData, selectedIds = EMPTY_ID_SET) {
 	if (!graphData || !Array.isArray(graphData.nodes) || graphData.nodes.length === 0) {
 		return { normalized: false, hasSelection: false };
 	}
@@ -218,7 +218,7 @@ function normalizeGraphContainer(graphData, selectedIds = EMPTY_ID_SET) {
 			if (aSelected !== bSelected) return aSelected ? -1 : 1;
 		}
 
-		return compareByGraphPosition(a, b);
+		return CompareByGraphPosition(a, b);
 	});
 
 	const idMap = {};
@@ -231,7 +231,7 @@ function normalizeGraphContainer(graphData, selectedIds = EMPTY_ID_SET) {
 		id: idMap[node.id]
 	}));
 
-	const { links: remappedLinks, maxLinkId } = remapLinksAndFindMax(graphData.links, idMap);
+	const { links: remappedLinks, maxLinkId } = RemapLinksAndFindMax(graphData.links, idMap);
 	graphData.links = remappedLinks;
 
 	if ("last_node_id" in graphData || !graphData.state) {
@@ -250,7 +250,7 @@ function normalizeGraphContainer(graphData, selectedIds = EMPTY_ID_SET) {
 	return { normalized: true, hasSelection };
 }
 
-function getSubgraphContainers(workflow) {
+function GetSubgraphContainers(workflow) {
 	const results = [];
 	const seen = new WeakSet();
 
@@ -272,7 +272,7 @@ function getSubgraphContainers(workflow) {
 	return results;
 }
 
-function normalizeWorkflow() {
+function NormalizeWorkflow() {
 	const raw = localStorage.getItem("workflow");
 
 	if (!raw) {
@@ -297,18 +297,18 @@ function normalizeWorkflow() {
 		return;
 	}
 
-	const selectedIds   = getSelectedNodeIds();
+	const selectedIds   = GetSelectedNodeIds();
 	const activeGraphId = normalizeGraphId(app.graph?.id);
 
-	const rootSelection = getSelectionForGraph(wf, selectedIds, activeGraphId, true);
-	const rootResult    = normalizeGraphContainer(wf, rootSelection);
+	const rootSelection = GetSelectionForGraph(wf, selectedIds, activeGraphId, true);
+	const rootResult    = NormalizeGraphContainer(wf, rootSelection);
 
-	const subgraphs       = getSubgraphContainers(wf);
-	let selectedSubgraphs = 0;
+	const subgraphs         = GetSubgraphContainers(wf);
+	let   selectedSubgraphs = 0;
 
 	for (const subgraph of subgraphs) {
-		const subgraphSelection = getSelectionForGraph(subgraph, selectedIds, activeGraphId, false);
-		const result            = normalizeGraphContainer(subgraph, subgraphSelection);
+		const subgraphSelection = GetSelectionForGraph(subgraph, selectedIds, activeGraphId, false);
+		const result            = NormalizeGraphContainer(subgraph, subgraphSelection);
 
 		if (result.hasSelection) {
 			selectedSubgraphs += 1;
@@ -322,13 +322,11 @@ function normalizeWorkflow() {
 	app.graph.setDirtyCanvas(true, true);
 
 	const modeLabel = rootResult.hasSelection || selectedSubgraphs > 0 ? "Selected first" : "All";
-	console.log(
-		`Workflow IDs normalized (${modeLabel}, sorted by graph position, subgraphs normalized: ${subgraphs.length}).`
-	);
+	console.log(`Workflow IDs normalized (${modeLabel}, sorted by graph position, subgraphs normalized: ${subgraphs.length}).`);
 }
 
 const CreateButton = async () => {
-	const { ComfyButton } = await getComfyUiComponents();
+	const { ComfyButton } = await GetComfyUiComponents();
 	const button = new ComfyButton({
 		tooltip: TOOLTIP,
 		app,
@@ -344,7 +342,7 @@ const CreateButton = async () => {
 	button.element.addEventListener("click", (e) => {
 		e.preventDefault();
 		e.stopPropagation();
-		normalizeWorkflow();
+		NormalizeWorkflow();
 	});
 
 	return button;
@@ -365,7 +363,7 @@ const AttachButton = async (attempt = 0) => {
 		return;
 	}
 
-	const { ComfyButtonGroup } = await getComfyUiComponents();
+	const { ComfyButtonGroup } = await GetComfyUiComponents();
 	const button = await CreateButton();
 	const group  = new ComfyButtonGroup(button);
 

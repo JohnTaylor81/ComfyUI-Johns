@@ -1,5 +1,5 @@
 import { app } from "/scripts/app.js";
-import { getComfyUiComponents } from "./JohnsComfyUiApi.js";
+import { GetComfyUiComponents } from "./JohnsComfyUiApi.js";
 
 import {
 	getAll,
@@ -7,8 +7,8 @@ import {
 	subscribe
 } from "./JohnsSettingsState.js";
 
-const BUTTON_GROUP_CLASS = "origin-axes-top-menu-group";
-const TOOLTIP = "Toggle Origin Axes";
+const BUTTON_GROUP_CLASS  = "origin-axes-top-menu-group";
+const TOOLTIP             = "Toggle Origin Axes";
 const MAX_ATTACH_ATTEMPTS = 120;
 
 const OriginAxesStyles = () => {
@@ -55,7 +55,7 @@ const CreateButton = async () => {
 	OriginAxesStyles();
 
 	let state = getAll();
-	const { ComfyButton } = await getComfyUiComponents();
+	const { ComfyButton } = await GetComfyUiComponents();
 
 	const button = new ComfyButton({
 		tooltip: TOOLTIP,
@@ -105,7 +105,7 @@ const AttachButton = async (attempt = 0) => {
 		return;
 	}
 
-	const { ComfyButtonGroup } = await getComfyUiComponents();
+	const { ComfyButtonGroup } = await GetComfyUiComponents();
 	const button = await CreateButton();
 	const group  = new ComfyButtonGroup(button);
 
